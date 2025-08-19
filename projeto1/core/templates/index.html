@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,11 +7,28 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
     <body>
         <h1>Index</h1>
-
-        <h1>{{ msg }} </h1>
+        <img src="{% static 'images/django.png' %}" />
+        <table>
+            <thead>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                    <tr>
+                        <td><a href="{% url 'produto' produto.id %}">{{ produto.nome }}<a/></td>
+                        <td>{{ produto.preco }}</td>
+                        <td>{{ produto.quantidade }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button onclick="teste();">Clique-me</button>
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
     </body>
 </html>

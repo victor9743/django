@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,10 +7,21 @@
         <title>Produto</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        {% bootstrap_css %}
     </head>
     <body>
-        <h1>Produto</h1>
-        <script src="" async defer></script>
+        <div class="container">
+            <h1>Produto</h1>
+            {% bootstrap_messages %}
+
+            <form action="{% url 'produto' %}" method="POST" class="form" autocomplete="false" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                {% endbuttons %}
+            </form>
+        </div>
+        {% bootstrap_javascript jquery='full' %}
     </body>
 </html>

@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,10 +7,52 @@
         <title>Index</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        {% bootstrap_css %}
     </head>
     <body>
-        <h1>Index</h1>
-        <script src="" async defer></script>
+        <div class="container">
+            <h1>Index</h1>
+            <table class="table table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Estoque</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                        <tr>
+                            <td>{{ produto.id }}</td>
+                            <td><a href="#modal{{ produto.id }}" data-toggle="modal">{{ produto.nome }}</a></td>
+                            <td>{{ produto.preco }}</td>
+                            <td>{{ produto.estoque }}</td>
+                        </tr>
+                        <div class="modal fade" id="modal{{ produto.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ produto.nome }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ produto.imagem.url }}" class="img-fluid" alt="{{ produto.name }}" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% bootstrap_javascript jquery='full' %}
     </body>
 </html>
